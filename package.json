@@ -1,8 +1,8 @@
 {
-  "name": "GetPumped",
-  "productName": "Get Pumped",
+  "name": "SoloTrainer",
+  "productName": "Solo Trainer",
   "version": "1.0.0",
-  "description": "Get ready to get pumped at work!",
+  "description": "SoloTrainer takes inspiration from Solo-Leveling's daily quest system",
   "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start",
@@ -40,7 +40,7 @@
   "keywords": [],
   "author": {
     "name": "Edo Mathias",
-    "email": "edo.mathias@overwolf.com"
+    "email": "edo.mathias@gmail.com"
   },
   "license": "MIT",
   "dependencies": {
