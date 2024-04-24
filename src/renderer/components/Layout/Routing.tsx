@@ -1,18 +1,18 @@
 import React from 'react';
 import { Route, Navigate, Routes } from 'react-router-dom';
-import WorkoutForm from '../Trainer/WorkoutForm';
-import Settings from '../Settings/Settings';
-import Layout from './Layout';
+import DailyQuest from '../Areas/Trainer/DailyQuest';
+import Settings from '../Areas/Settings/Settings';
+import MainMenu from '../Areas/MainMenu/MainMenu';
 
 function Routing(): React.ReactElement {
   return (
     <div className="Routes">
       <Routes>
         {/* Main Menu: */}
-        <Route path="/mainMenu/*" element={<Layout />} />
+        <Route path="/mainMenu/*" element={<MainMenu />} />
 
         {/* Trainer: */}
-        <Route path="/workoutForm" element={<WorkoutForm />} />
+        <Route path="/dailyQuest" element={<DailyQuest />} />
 
         {/* Settings: */}
         <Route path="/settings" element={<Settings />} />
