@@ -2,15 +2,20 @@
 //  and IPC communication.
 import { app, ipcMain } from 'electron';
 import WindowManager from './window';
+import Store from 'electron-store';
+import ExerciseModel from '../models/exercise-model';
 
 class MainApp {
   private windowManager: WindowManager;
+  private store: Store;
   constructor() {
     this.windowManager = new WindowManager();
+    this.store = new Store();
     app.on('ready', this.windowManager.createWindow);
     app.on('window-all-closed', this.handleWindowAllClosed);
     app.on('activate', this.handleActivate);
-    ipcMain.on('set-text', this.logText.bind(this));
+    ipcMain.on('set-exercises', this.storeExercises.bind(this));
+    ipcMain.handle('get-exercises', this.getExercises.bind(this));
   }
 
   private handleWindowAllClosed(): void {
@@ -25,9 +30,14 @@ class MainApp {
     }
   }
 
-  private logText(event: Electron.IpcMainEvent, message: string): void {
-    console.log('Message from renderer:', message);
-    event.returnValue = 'Message received successfully';
+  private storeExercises(event: Electron.IpcMainEvent, exercises: any): void {
+    this.store.set('exercises', exercises);
+  }
+
+  private getExercises(event: Electron.IpcMainEvent) {
+    const exercises = this.store.get('exercises');
+    console.log('Exercises from store:', exercises);
+    return exercises;
   }
 }
 
