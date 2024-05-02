@@ -5,6 +5,7 @@ import WindowManager from "./window";
 import Store from "electron-store";
 import ExerciseModel from "../models/exercise-model";
 import AppNotification from "./notification";
+import TimerModel from "../models/timer-model";
 
 class MainApp {
   private windowManager: WindowManager;
@@ -15,8 +16,9 @@ class MainApp {
     app.on("ready", this.windowManager.createWindow);
     app.on("window-all-closed", this.handleWindowAllClosed);
     app.on("activate", this.handleActivate);
-    ipcMain.on("set-exercises", this.storeExercises.bind(this));
+    ipcMain.on("set-exercises", this.setExercises.bind(this));
     ipcMain.handle("get-exercises", this.getExercises.bind(this));
+    ipcMain.on("set-timer", this.setTimer.bind(this));
     ipcMain.on("timer-complete", this.showNotification);
   }
 
@@ -32,7 +34,7 @@ class MainApp {
     }
   }
 
-  private storeExercises(event: Electron.IpcMainEvent, exercises: any): void {
+  private setExercises(event: Electron.IpcMainEvent, exercises: any): void {
     this.store.set("exercises", exercises);
   }
 
@@ -41,6 +43,15 @@ class MainApp {
     console.log("Exercises from store:", exercises);
     return exercises;
   }
+
+  private setTimer(event: Electron.IpcMainEvent, timer: TimerModel): void {
+    console.log(timer);
+    this.store.set("timer", timer);
+  }
+
+  // private getTimer(_event: Electron.IpcMainEvent): number {
+  //   return this.store.get("timer");
+  // }
 
   private showNotification(): void {
     new AppNotification("Timer finished", "GET TO WORK!").showNotification();

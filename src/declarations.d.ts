@@ -1,4 +1,5 @@
-import { ExerciseModel } from ".";
+import ExerciseModel from "./models/exercise-model";
+import TimerModel from "./models/timer-model";
 
 export interface ITrainerApi {
   setExercises: (exercises: ExerciseModel[]) => void;
@@ -6,6 +7,7 @@ export interface ITrainerApi {
 }
 
 export interface ITimerApi {
+  setTimer: (timer: TimerModel) => void;
   timerComplete: () => void;
 }
 

@@ -3,6 +3,7 @@
 
 import { contextBridge, ipcRenderer } from "electron";
 import ExerciseModel from "./models/exercise-model";
+import TimerModel from "./models/timer-model";
 
 contextBridge.exposeInMainWorld("trainerApi", {
   setExercises: (exercises: ExerciseModel[]) => {
@@ -14,6 +15,9 @@ contextBridge.exposeInMainWorld("trainerApi", {
 });
 
 contextBridge.exposeInMainWorld("timerApi", {
+  setTimer: (timer: TimerModel) => {
+    ipcRenderer.send("set-timer", timer);
+  },
   timerComplete: () => {
     ipcRenderer.send("timer-complete");
   },
