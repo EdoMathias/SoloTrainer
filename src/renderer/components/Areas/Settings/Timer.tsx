@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 function Timer() {
   const [duration, setDuration] = useState({
@@ -19,6 +19,7 @@ function Timer() {
         ) {
           clearInterval(interval);
           setIsActive(false);
+          window.timerApi.timerComplete();
         } else {
           setDuration((prevDuration) => {
             let hours = prevDuration.hours;
@@ -39,7 +40,9 @@ function Timer() {
     } else {
       clearInterval(interval);
     }
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+    };
   }, [isActive, duration]);
 
   const handleStartStop = () => {
@@ -64,6 +67,7 @@ function Timer() {
             }
           />
         </label>
+        <br />
         <label>
           Minutes:
           <input
@@ -74,6 +78,7 @@ function Timer() {
             }
           />
         </label>
+        <br />
         <label>
           Seconds:
           <input
@@ -87,15 +92,15 @@ function Timer() {
       </div>
       <div>
         <button onClick={handleStartStop}>
-          {isActive ? 'Pause' : 'Start'}
+          {isActive ? "Pause" : "Start"}
         </button>
         <button onClick={handleReset}>Reset</button>
       </div>
       <div>
         <p>
-          {String(duration.hours).padStart(2, '0')}:
-          {String(duration.minutes).padStart(2, '0')}:
-          {String(duration.seconds).padStart(2, '0')}
+          {String(duration.hours).padStart(2, "0")}:
+          {String(duration.minutes).padStart(2, "0")}:
+          {String(duration.seconds).padStart(2, "0")}
         </p>
       </div>
     </div>
