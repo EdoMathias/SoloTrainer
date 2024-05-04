@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import ExerciseModel from '../../../../models/exercise-model';
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import ExerciseModel from "../../../../models/exercise-model";
 
 function ExerciseForm() {
   const { register, handleSubmit } = useForm<ExerciseModel>();
@@ -11,7 +11,7 @@ function ExerciseForm() {
       const name = data[`exercise${i + 1}`] as string;
       const repetitions = data[`exercise${i + 1}_number`] as number;
       if (name && repetitions) {
-        exercises.push(new ExerciseModel(name, repetitions));
+        exercises.push(new ExerciseModel(i + 1, name, repetitions, false));
       }
     }
     window.trainerApi.setExercises(exercises);
