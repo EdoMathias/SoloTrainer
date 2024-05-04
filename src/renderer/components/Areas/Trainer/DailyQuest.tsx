@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import ExerciseModel from '../../../../models/exercise-model';
+import React, { useEffect, useState } from "react";
+import ExerciseModel from "../../../../models/exercise-model";
+import AllotedTime from "../../Timer/AllotedTime";
+import TimeLeft from "../../Timer/TimeLeft";
 
 function DailyQuest() {
   const [dailyQuest, setDailyQuest] = useState<ExerciseModel[]>([]);
@@ -8,10 +10,10 @@ function DailyQuest() {
     const getExercises = async () => {
       try {
         const exercises = await window.trainerApi.getExercises();
-        console.log('Exercises:', exercises);
+        console.log("Exercises:", exercises);
         setDailyQuest(exercises);
       } catch (error) {
-        console.error('Error fetching exercises:', error);
+        console.error("Error fetching exercises:", error);
       }
     };
 
@@ -29,6 +31,8 @@ function DailyQuest() {
           </li>
         ))}
       </ol>
+      <AllotedTime />
+      <TimeLeft />
     </div>
   );
 }

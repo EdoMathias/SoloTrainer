@@ -1,13 +1,14 @@
-import React from 'react';
-import ExerciseForm from './ExerciseForm';
-import Timer from './Timer';
+import ExerciseForm from "./ExerciseForm";
+import MenuButton from "../../MenuButton/MenuButton";
+import TimerForm from "../../Timer/TimerForm";
 
 function Settings() {
   return (
     <div>
       <h1>Settings</h1>
+      <MenuButton navTo="mainMenu" name="Main Menu" />
       <hr />
-      <Timer />
+      <TimerForm />
       <hr />
       <label>Daily quests:</label>
       <ExerciseForm />

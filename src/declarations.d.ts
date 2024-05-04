@@ -1,8 +1,15 @@
-import { ExerciseModel } from '.';
+import ExerciseModel from "./models/exercise-model";
+import TimerModel from "./models/timer-model";
 
 export interface ITrainerApi {
   setExercises: (exercises: ExerciseModel[]) => void;
   getExercises: () => Promise<ExerciseModel[]>;
+}
+
+export interface ITimerApi {
+  setTimer: (timer: TimerModel) => void;
+  getTimer: () => Promise<TimerModel>;
+  timerComplete: () => void;
 }
 
 export interface IIpcRenderer {
@@ -17,5 +24,6 @@ declare global {
   interface Window {
     trainerApi: ITrainerApi;
     ipcRenderer: IIpcRenderer;
+    timerApi: ITimerApi;
   }
 }

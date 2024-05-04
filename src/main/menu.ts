@@ -1,5 +1,6 @@
 // Menu's code goes here:
-import { BrowserWindow, Menu, MenuItemConstructorOptions } from 'electron';
+import { BrowserWindow, Menu, MenuItemConstructorOptions } from "electron";
+import AppNotification from "./notification";
 
 class AppMenu {
   private menuItems: MenuItemConstructorOptions[];
@@ -7,12 +8,21 @@ class AppMenu {
   constructor(private mainWindow: BrowserWindow) {
     this.menuItems = [
       {
-        label: 'Menu',
+        label: "Menu",
         submenu: [
           {
-            label: 'Open DevTools',
+            label: "Open DevTools",
             click: () => {
               this.mainWindow?.webContents.openDevTools();
+            },
+          },
+          {
+            label: "Show Notification",
+            click: () => {
+              new AppNotification(
+                "Hello",
+                "This is a notification"
+              ).showNotification();
             },
           },
         ],
