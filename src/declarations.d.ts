@@ -8,6 +8,7 @@ export interface ITrainerApi {
 
 export interface ITimerApi {
   setTimer: (timer: TimerModel) => void;
+  getTimer: () => Promise<TimerModel>;
   timerComplete: () => void;
 }
 

@@ -18,6 +18,9 @@ contextBridge.exposeInMainWorld("timerApi", {
   setTimer: (timer: TimerModel) => {
     ipcRenderer.send("set-timer", timer);
   },
+  getTimer: () => {
+    return ipcRenderer.invoke("get-timer");
+  },
   timerComplete: () => {
     ipcRenderer.send("timer-complete");
   },

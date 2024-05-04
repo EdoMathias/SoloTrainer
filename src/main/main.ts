@@ -6,6 +6,7 @@ import Store from "electron-store";
 import ExerciseModel from "../models/exercise-model";
 import AppNotification from "./notification";
 import TimerModel from "../models/timer-model";
+import GetTimerModel from "../models/getTimer-model";
 
 class MainApp {
   private windowManager: WindowManager;
@@ -19,6 +20,7 @@ class MainApp {
     ipcMain.on("set-exercises", this.setExercises.bind(this));
     ipcMain.handle("get-exercises", this.getExercises.bind(this));
     ipcMain.on("set-timer", this.setTimer.bind(this));
+    ipcMain.handle("get-timer", this.getTimer.bind(this));
     ipcMain.on("timer-complete", this.showNotification);
   }
 
@@ -49,9 +51,19 @@ class MainApp {
     this.store.set("timer", timer);
   }
 
-  // private getTimer(_event: Electron.IpcMainEvent): number {
-  //   return this.store.get("timer");
-  // }
+  private getTimer(_event: Electron.IpcMainEvent) {
+    const timer = this.store.get("timer") as GetTimerModel;
+
+    const convertedTimer = {
+      hours: parseInt(timer.hours),
+      minutes: parseInt(timer.minutes),
+      seconds: parseInt(timer.seconds),
+    };
+
+    console.log("converted timer:", convertedTimer);
+
+    return convertedTimer;
+  }
 
   private showNotification(): void {
     new AppNotification("Timer finished", "GET TO WORK!").showNotification();
