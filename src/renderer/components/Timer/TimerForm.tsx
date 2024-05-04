@@ -21,6 +21,9 @@ function TimerForm() {
           type="number"
           id={`timer_hours`}
           name={`timer_hours`}
+          defaultValue={0}
+          min={0}
+          max={4}
           {...register(`hours`)}
         />
         <label htmlFor={`timer_minutes`}>Minutes:</label>
@@ -28,6 +31,9 @@ function TimerForm() {
           type="number"
           id={`timer_minutes`}
           name={`timer_minutes`}
+          defaultValue={0}
+          min={0}
+          max={59}
           {...register(`minutes`)}
         />
         <label htmlFor={`timer_seconds`}>Seconds:</label>
@@ -35,6 +41,9 @@ function TimerForm() {
           type="number"
           id={`timer_seconds`}
           name={`timer_seconds`}
+          defaultValue={0}
+          min={0}
+          max={59}
           {...register(`seconds`)}
         />
       </div>
