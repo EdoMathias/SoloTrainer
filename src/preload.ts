@@ -12,6 +12,12 @@ contextBridge.exposeInMainWorld("trainerApi", {
   getExercises: () => {
     return ipcRenderer.invoke("get-exercises");
   },
+  exerciseComplete: (exerciseName: string) => {
+    ipcRenderer.send("exercise-complete", exerciseName);
+  },
+  allExercisesComplete: () => {
+    ipcRenderer.send("all-exercises-complete");
+  },
 });
 
 contextBridge.exposeInMainWorld("timerApi", {

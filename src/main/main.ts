@@ -21,7 +21,12 @@ class MainApp {
     ipcMain.handle("get-exercises", this.getExercises.bind(this));
     ipcMain.on("set-timer", this.setTimer.bind(this));
     ipcMain.handle("get-timer", this.getTimer.bind(this));
-    ipcMain.on("timer-complete", this.showNotification);
+    ipcMain.on("timer-complete", this.timerCompleteNotification);
+    ipcMain.on(
+      "exercise-complete",
+      this.exerciseCompleteNotification.bind(this)
+    );
+    ipcMain.on("all-exercises-complete", this.allExercisesCompleteNotification);
   }
 
   private handleWindowAllClosed(): void {
@@ -42,12 +47,10 @@ class MainApp {
 
   private getExercises(event: Electron.IpcMainEvent) {
     const exercises = this.store.get("exercises");
-    console.log("Exercises from store:", exercises);
     return exercises;
   }
 
   private setTimer(event: Electron.IpcMainEvent, timer: TimerModel): void {
-    console.log(timer);
     this.store.set("timer", timer);
   }
 
@@ -60,13 +63,28 @@ class MainApp {
       seconds: parseInt(timer.seconds),
     };
 
-    console.log("converted timer:", convertedTimer);
-
     return convertedTimer;
   }
 
-  private showNotification(): void {
+  private timerCompleteNotification(): void {
     new AppNotification("Timer finished", "GET TO WORK!").showNotification();
+  }
+
+  private exerciseCompleteNotification(
+    event: Electron.IpcMain,
+    exerciseName: string
+  ): void {
+    new AppNotification(
+      `${exerciseName} completed!`,
+      "Nice job!"
+    ).showNotification();
+  }
+
+  private allExercisesCompleteNotification(): void {
+    new AppNotification(
+      "All exercises complete",
+      "See you back tomorrow!"
+    ).showNotification();
   }
 }
 
