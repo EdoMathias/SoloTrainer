@@ -12,7 +12,6 @@ function TimeLeft() {
     const getTimer = async () => {
       try {
         const timer = await window.timerApi.getTimer();
-        console.log("Timer:", timer);
         setAllotedTime(timer);
         setTimeLeft(timer);
       } catch (error) {

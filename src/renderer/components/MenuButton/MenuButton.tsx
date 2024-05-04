@@ -1,5 +1,5 @@
-import { NavLink } from 'react-router-dom';
-import './MenuButton.css';
+import { NavLink } from "react-router-dom";
+import "./MenuButton.css";
 
 interface MenuButtonProps {
   name: string;
@@ -7,16 +7,8 @@ interface MenuButtonProps {
 }
 
 function MenuButton(menuButtonProps: MenuButtonProps): React.ReactElement {
-  function handleClick() {
-    console.log(`${menuButtonProps.name} button clicked`);
-  }
-
   return (
-    <NavLink
-      to={`/${menuButtonProps.navTo}`}
-      className="menuButton"
-      onClick={() => handleClick()}
-    >
+    <NavLink to={`/${menuButtonProps.navTo}`} className="menuButton">
       {menuButtonProps.name}
     </NavLink>
   );

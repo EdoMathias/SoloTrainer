@@ -1,8 +1,8 @@
-import React from 'react';
-import { Route, Navigate, Routes } from 'react-router-dom';
-import DailyQuest from '../Areas/Trainer/DailyQuest';
-import Settings from '../Areas/Settings/Settings';
-import MainMenu from '../Areas/MainMenu/MainMenu';
+import React from "react";
+import { Route, Navigate, Routes } from "react-router-dom";
+import DailyQuest from "../Areas/DailyQuest/DailyQuest";
+import Settings from "../Areas/Settings/Settings";
+import MainMenu from "../Areas/MainMenu/MainMenu";
 
 function Routing(): React.ReactElement {
   return (

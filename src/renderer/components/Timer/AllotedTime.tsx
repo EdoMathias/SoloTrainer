@@ -10,7 +10,6 @@ function AllotedTime() {
     const getTimer = async () => {
       try {
         const timer = await window.timerApi.getTimer();
-        console.log("Timer:", timer);
         setAllotedTime(timer);
       } catch (error) {
         console.error("Error fetching timer:", error);
