@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
 interface Exercise {
   id: number;
@@ -21,6 +21,10 @@ const ExerciseList: React.FC<Props> = ({ exercises }) => {
   const [allCompleted, setAllCompleted] = useState(false);
 
   useEffect(() => {
+    if (!exercises) {
+      return;
+    }
+
     const initialStates: ExerciseState[] = exercises.map((exercise) => {
       return {
         ...exercise,
@@ -88,7 +92,7 @@ const ExerciseList: React.FC<Props> = ({ exercises }) => {
       {states.map((state, index) => (
         <div key={index}>
           <p>
-            {state.name}{" "}
+            {state.name}{' '}
             <button
               disabled={state.count === 0 || state.completed}
               onClick={() => handleDecrement(index)}
@@ -100,7 +104,7 @@ const ExerciseList: React.FC<Props> = ({ exercises }) => {
               onClick={() => handleIncrement(index)}
             >
               +
-            </button>{" "}
+            </button>{' '}
             {`[${state.count}/${state.repetitions}]`}
           </p>
         </div>
