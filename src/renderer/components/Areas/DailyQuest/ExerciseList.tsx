@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { stat } from 'original-fs';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 interface Exercise {
   id: number;
@@ -30,6 +31,8 @@ const ExerciseList: React.FC<Props> = ({ exercises }) => {
         ...exercise,
         repetitions: parseInt(String(exercise.repetitions), 10),
         count: 0,
+        completed: false,
+        notificationSent: false,
       };
     });
     setStates(initialStates);
@@ -52,11 +55,21 @@ const ExerciseList: React.FC<Props> = ({ exercises }) => {
   }, [states]);
 
   useEffect(() => {
-    const allComplete = states.every(
-      (state) => state.completed && state.notificationSent
-    );
-    setAllCompleted(allComplete);
+    if (states.length === 0) {
+      return;
+    }
+    const isAllComplete = states.every((state) => {
+      state.completed && state.notificationSent;
+    });
+    console.log('completed: ', isAllComplete);
+    setAllCompleted(isAllComplete);
   }, [states]);
+
+  useEffect(() => {
+    if (allCompleted) {
+      window.trainerApi.allExercisesComplete();
+    }
+  }, [allCompleted]);
 
   const handleIncrement = (index: number) => {
     setStates((prevStates) => {
