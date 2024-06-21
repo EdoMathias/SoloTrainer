@@ -1,4 +1,4 @@
-import ExerciseForm from "./ExerciseForm";
+import ExerciseForm from "../../Exercises/ExerciseForm";
 import MenuButton from "../../MenuButton/MenuButton";
 import TimerForm from "../../Timer/TimerForm";
 import "./Settings.css";

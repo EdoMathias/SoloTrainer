@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import ExerciseModel from "../../../../models/exercise-model";
+import ExerciseModel from "../../../models/exercise-model";
 import "./ExerciseForm.css";
 
 function ExerciseForm() {
