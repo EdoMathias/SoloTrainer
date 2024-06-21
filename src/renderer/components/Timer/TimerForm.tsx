@@ -41,6 +41,7 @@ function TimerForm() {
           HOURS:
         </label>
         <input
+          className="time-form-input"
           type="number"
           id={`timer_hours`}
           name={`timer_hours`}
@@ -53,6 +54,7 @@ function TimerForm() {
           MINUTES:
         </label>
         <input
+          className="time-form-input"
           type="number"
           id={`timer_minutes`}
           name={`timer_minutes`}
@@ -65,6 +67,7 @@ function TimerForm() {
           SECONDS:
         </label>
         <input
+          className="time-form-input"
           type="number"
           id={`timer_seconds`}
           name={`timer_seconds`}
