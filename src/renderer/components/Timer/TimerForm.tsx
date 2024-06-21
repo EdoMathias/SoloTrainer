@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import TimerModel from "../../../models/timer-model";
+import "./TimerForm.css";
 
 function TimerForm() {
   const { register, handleSubmit } = useForm<TimerModel>();
@@ -14,9 +15,12 @@ function TimerForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className="time-form" onSubmit={handleSubmit(onSubmit)}>
+      <h1 className="time-form-header">TIMER</h1>
       <div>
-        <label htmlFor={`timer_hours`}>Hours:</label>
+        <label className="time-form-label" htmlFor={`timer_hours`}>
+          HOURS:
+        </label>
         <input
           type="number"
           id={`timer_hours`}
@@ -26,7 +30,9 @@ function TimerForm() {
           max={4}
           {...register(`hours`)}
         />
-        <label htmlFor={`timer_minutes`}>Minutes:</label>
+        <label className="time-form-label" htmlFor={`timer_minutes`}>
+          MINUTES:
+        </label>
         <input
           type="number"
           id={`timer_minutes`}
@@ -36,7 +42,9 @@ function TimerForm() {
           max={59}
           {...register(`minutes`)}
         />
-        <label htmlFor={`timer_seconds`}>Seconds:</label>
+        <label className="time-form-label" htmlFor={`timer_seconds`}>
+          SECONDS:
+        </label>
         <input
           type="number"
           id={`timer_seconds`}
@@ -48,7 +56,9 @@ function TimerForm() {
         />
       </div>
 
-      <button type="submit">Set timer</button>
+      <button className="timer-submit-button" type="submit">
+        Set timer
+      </button>
     </form>
   );
 }
