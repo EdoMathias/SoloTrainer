@@ -31,7 +31,7 @@ function DailyQuest() {
       </h3>
       <h2 className="daily-quest-title goal-title">GOAL</h2>
       <ExerciseList exercises={dailyQuest} />
-      <AllotedTime />
+      {/* <AllotedTime /> */}
       <TimeLeft />
       <hr />
       <div>
