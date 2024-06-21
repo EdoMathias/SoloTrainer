@@ -6,8 +6,11 @@ import "./Settings.css";
 function Settings() {
   return (
     <div className="settings-container">
-      <h1 className="settings-title">Settings</h1>
-      <MenuButton navTo="mainMenu" name="Main Menu" />
+      <h1 className="settings-title">SETTINGS</h1>
+      <div className="navigation-buttons-container">
+        <MenuButton navTo="dailyQuest" name="DAILY QUEST" />
+        <MenuButton navTo="mainMenu" name="MAIN MENU" />
+      </div>
       <hr />
       <TimerForm />
       <hr />

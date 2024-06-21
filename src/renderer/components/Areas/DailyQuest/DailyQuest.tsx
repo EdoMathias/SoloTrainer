@@ -4,6 +4,7 @@ import AllotedTime from "../../Timer/AllotedTime";
 import TimeLeft from "../../Timer/TimeLeft";
 import ExerciseList from "./ExerciseList";
 import "./DailyQuest.css";
+import MenuButton from "../../MenuButton/MenuButton";
 
 function DailyQuest() {
   const [dailyQuest, setDailyQuest] = useState<ExerciseModel[]>([]);
@@ -32,6 +33,11 @@ function DailyQuest() {
       <ExerciseList exercises={dailyQuest} />
       <AllotedTime />
       <TimeLeft />
+      <hr />
+      <div>
+        <MenuButton name="SETTINGS" navTo="settings" />
+        <MenuButton name="MAIN MENU" navTo="mainMenu" />
+      </div>
     </div>
   );
 }
