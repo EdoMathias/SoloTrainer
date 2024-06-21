@@ -100,9 +100,12 @@ const ExerciseList: React.FC<Props> = ({ exercises }) => {
     });
   };
 
+  if (states.length === 0) {
+    return <div className="exercise-name-label">{`[NO EXERCISES SET]`}</div>;
+  }
+
   return (
     <div className="exercise-list-container">
-      {/* Todo: change states array name since is has exercises inside */}
       {states.map((state, index) => (
         <div className="exercise-container" key={index}>
           <p className="exercise-name-label">{state.name}</p>
