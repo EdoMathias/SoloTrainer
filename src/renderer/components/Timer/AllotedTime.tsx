@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import TimerModel from "../../../models/timer-model";
+import React, { useEffect, useState } from 'react';
+import TimerModel from '../../../models/timer-model';
 
 function AllotedTime() {
   const [allotedTime, setAllotedTime] = useState<TimerModel>(
@@ -10,9 +10,12 @@ function AllotedTime() {
     const getTimer = async () => {
       try {
         const timer = await window.timerApi.getTimer();
+        if (!timer) {
+          return;
+        }
         setAllotedTime(timer);
       } catch (error) {
-        console.error("Error fetching timer:", error);
+        console.error('Error fetching timer:', error);
       }
     };
 
