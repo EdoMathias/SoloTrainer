@@ -1,9 +1,28 @@
 import { useForm } from "react-hook-form";
 import TimerModel from "../../../models/timer-model";
 import "./TimerForm.css";
+import { useEffect, useState } from "react";
 
 function TimerForm() {
-  const { register, handleSubmit } = useForm<TimerModel>();
+  const { register, handleSubmit, setValue } = useForm<TimerModel>();
+
+  useEffect(() => {
+    const getTimer = async () => {
+      try {
+        const timer = await window.timerApi.getTimer();
+        if (!timer) {
+          return;
+        }
+        setValue("hours", timer.hours);
+        setValue("minutes", timer.minutes);
+        setValue("seconds", timer.seconds);
+      } catch (error) {
+        console.error("Error fetching timer:", error);
+      }
+    };
+
+    getTimer();
+  }, []);
 
   const onSubmit = (data: TimerModel) => {
     const timer = new TimerModel(
