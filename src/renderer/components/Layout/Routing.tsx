@@ -6,7 +6,7 @@ import MainMenu from "../Areas/MainMenu/MainMenu";
 
 function Routing(): React.ReactElement {
   return (
-    <div className="Routes">
+    <>
       <Routes>
         {/* Main Menu: */}
         <Route path="/mainMenu/*" element={<MainMenu />} />
@@ -20,7 +20,7 @@ function Routing(): React.ReactElement {
         {/* Default Route: */}
         <Route path="/" element={<Navigate to="/mainMenu" />} />
       </Routes>
-    </div>
+    </>
   );
 }
 
