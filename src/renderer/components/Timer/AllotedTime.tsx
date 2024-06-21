@@ -26,7 +26,8 @@ function AllotedTime() {
   return (
     <div>
       <h2 className="alloted-time-title">
-        ALLOTED TIME: {allotedTime.hours} HOURS, {allotedTime.minutes} MINUTES,
+        ALLOTED TIME: {<br />} {allotedTime.hours} HOURS, {allotedTime.minutes}{" "}
+        MINUTES,
         {allotedTime.seconds} SECONDS
       </h2>
     </div>

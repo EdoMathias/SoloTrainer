@@ -74,13 +74,19 @@ function TimeLeft() {
   };
 
   return (
-    <div>
+    <div className="time-left-container">
       <h2 className="time-left-title">
-        TIME LEFT: {timeLeft.hours} HOURS, {timeLeft.minutes} MINUTES,
+        TIME LEFT: {<br />} {timeLeft.hours} HOURS, {timeLeft.minutes} MINUTES,
         {timeLeft.seconds} SECONDS
       </h2>
-      <button onClick={handleStartStop}>{isActive ? "Pause" : "Start"}</button>
-      <button onClick={handleReset}>Reset</button>
+      <div className="time-left-buttons-container">
+        <button className="time-left-button" onClick={handleStartStop}>
+          {isActive ? "PAUSE TIMER" : "START TIMER"}
+        </button>
+        <button className="time-left-button" onClick={handleReset}>
+          RESET TIMER
+        </button>
+      </div>
     </div>
   );
 }
