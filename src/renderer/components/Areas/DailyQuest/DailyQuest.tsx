@@ -3,6 +3,7 @@ import ExerciseModel from "../../../../models/exercise-model";
 import AllotedTime from "../../Timer/AllotedTime";
 import TimeLeft from "../../Timer/TimeLeft";
 import ExerciseList from "./ExerciseList";
+import "./DailyQuest.css";
 
 function DailyQuest() {
   const [dailyQuest, setDailyQuest] = useState<ExerciseModel[]>([]);
@@ -23,10 +24,11 @@ function DailyQuest() {
   }, []);
 
   return (
-    <div>
-      <h3>{"[Daily Quest: Strength Training has arrived.]"}</h3>
-      <h2>GOAL</h2>
-      <hr />
+    <div className="daily-quest-container">
+      <h3 className="daily-quest-title">
+        {"[Daily Quest: Strength Training has arrived.]"}
+      </h3>
+      <h2 className="daily-quest-title goal-title">GOAL</h2>
       <ExerciseList exercises={dailyQuest} />
       <AllotedTime />
       <TimeLeft />
