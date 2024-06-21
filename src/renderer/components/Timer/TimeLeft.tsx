@@ -1,5 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import TimerModel from '../../../models/timer-model';
+import React, { useEffect, useMemo, useState } from "react";
+import TimerModel from "../../../models/timer-model";
+import "./TimeLeft.css";
 
 function TimeLeft() {
   const [allotedTime, setAllotedTime] = useState<TimerModel>(
@@ -18,7 +19,7 @@ function TimeLeft() {
         setAllotedTime(timer);
         setTimeLeft(timer);
       } catch (error) {
-        console.error('Error fetching timer:', error);
+        console.error("Error fetching timer:", error);
       }
     };
 
@@ -74,11 +75,11 @@ function TimeLeft() {
 
   return (
     <div>
-      <h2>
+      <h2 className="time-left-title">
         TIME LEFT: {timeLeft.hours} HOURS, {timeLeft.minutes} MINUTES,
         {timeLeft.seconds} SECONDS
       </h2>
-      <button onClick={handleStartStop}>{isActive ? 'Pause' : 'Start'}</button>
+      <button onClick={handleStartStop}>{isActive ? "Pause" : "Start"}</button>
       <button onClick={handleReset}>Reset</button>
     </div>
   );

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import TimerModel from '../../../models/timer-model';
+import React, { useEffect, useState } from "react";
+import TimerModel from "../../../models/timer-model";
+import "./AllotedTime.css";
 
 function AllotedTime() {
   const [allotedTime, setAllotedTime] = useState<TimerModel>(
@@ -15,7 +16,7 @@ function AllotedTime() {
         }
         setAllotedTime(timer);
       } catch (error) {
-        console.error('Error fetching timer:', error);
+        console.error("Error fetching timer:", error);
       }
     };
 
@@ -24,7 +25,7 @@ function AllotedTime() {
 
   return (
     <div>
-      <h2>
+      <h2 className="alloted-time-title">
         ALLOTED TIME: {allotedTime.hours} HOURS, {allotedTime.minutes} MINUTES,
         {allotedTime.seconds} SECONDS
       </h2>
