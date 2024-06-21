@@ -13,7 +13,9 @@ class AppMenu {
           {
             label: "Open DevTools",
             click: () => {
-              this.mainWindow?.webContents.openDevTools();
+              this.mainWindow?.webContents.openDevTools({
+                mode: "detach",
+              });
             },
           },
           {
