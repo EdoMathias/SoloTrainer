@@ -10,11 +10,6 @@ interface Exercise {
   notificationSent: boolean;
 }
 
-// interface ExerciseState extends Exercise {
-//   // count: number;
-//   // notificationSent?: boolean;
-// }
-
 interface Props {
   exercises: Exercise[];
 }
@@ -33,8 +28,6 @@ const ExerciseList: React.FC<Props> = ({ exercises }) => {
         ...exercise,
         repetitions: parseInt(String(exercise.repetitions), 10),
         currentRepetitions: exercise.currentRepetitions,
-        // completed: false,
-        // notificationSent: false,
       };
     });
     setStates(initialStates);
@@ -58,25 +51,7 @@ const ExerciseList: React.FC<Props> = ({ exercises }) => {
     });
   }, [states]);
 
-  // useEffect(() => {
-  //   if (states.length === 0) {
-  //     return;
-  //   }
-  //   const isAllComplete = states.every((state) => {
-  //     state.completed && state.notificationSent;
-  //   });
-  //   console.log("completed: ", isAllComplete);
-  //   setAllCompleted(isAllComplete);
-  // }, [states]);
-
-  // useEffect(() => {
-  //   if (allCompleted) {
-  //     window.trainerApi.allExercisesComplete();
-  //   }
-  // }, [allCompleted]);
-
   const handleIncrement = (index: number) => {
-    console.log("Increment button clicked for exercise at index:", index);
     setStates((prevStates) => {
       return prevStates.map((prevState, i) => {
         if (i === index) {
@@ -90,7 +65,6 @@ const ExerciseList: React.FC<Props> = ({ exercises }) => {
           ) {
             updatedState.completed = true; // Set completed flag to true
           }
-          console.log("Calling incrementRepetitions for:", updatedState.name);
           window.trainerApi.incrementRepetitions(updatedState.name);
           return updatedState;
         }
