@@ -4,21 +4,23 @@ import "./ExerciseList.css";
 interface Exercise {
   id: number;
   name: string;
-  repetitions: number;
   completed: boolean;
+  repetitions: number;
+  currentRepetitions?: number;
+  notificationSent: boolean;
 }
 
-interface ExerciseState extends Exercise {
-  count: number;
-  notificationSent?: boolean;
-}
+// interface ExerciseState extends Exercise {
+//   // count: number;
+//   // notificationSent?: boolean;
+// }
 
 interface Props {
   exercises: Exercise[];
 }
 
 const ExerciseList: React.FC<Props> = ({ exercises }) => {
-  const [states, setStates] = useState<ExerciseState[]>([]);
+  const [states, setStates] = useState<Exercise[]>([]);
   const [allCompleted, setAllCompleted] = useState(false);
 
   useEffect(() => {
@@ -26,13 +28,13 @@ const ExerciseList: React.FC<Props> = ({ exercises }) => {
       return;
     }
 
-    const initialStates: ExerciseState[] = exercises.map((exercise) => {
+    const initialStates: Exercise[] = exercises.map((exercise) => {
       return {
         ...exercise,
         repetitions: parseInt(String(exercise.repetitions), 10),
-        count: 0,
-        completed: false,
-        notificationSent: false,
+        currentRepetitions: exercise.currentRepetitions,
+        // completed: false,
+        // notificationSent: false,
       };
     });
     setStates(initialStates);
@@ -45,8 +47,10 @@ const ExerciseList: React.FC<Props> = ({ exercises }) => {
         setStates((prevStates) => {
           return prevStates.map((prevState, i) => {
             if (i === index) {
-              return { ...prevState, notificationSent: true };
+              return { ...prevState, completed: true, notificationSent: true };
             }
+            console.log(prevState);
+
             return prevState;
           });
         });
@@ -54,34 +58,40 @@ const ExerciseList: React.FC<Props> = ({ exercises }) => {
     });
   }, [states]);
 
-  useEffect(() => {
-    if (states.length === 0) {
-      return;
-    }
-    const isAllComplete = states.every((state) => {
-      state.completed && state.notificationSent;
-    });
-    console.log("completed: ", isAllComplete);
-    setAllCompleted(isAllComplete);
-  }, [states]);
+  // useEffect(() => {
+  //   if (states.length === 0) {
+  //     return;
+  //   }
+  //   const isAllComplete = states.every((state) => {
+  //     state.completed && state.notificationSent;
+  //   });
+  //   console.log("completed: ", isAllComplete);
+  //   setAllCompleted(isAllComplete);
+  // }, [states]);
 
-  useEffect(() => {
-    if (allCompleted) {
-      window.trainerApi.allExercisesComplete();
-    }
-  }, [allCompleted]);
+  // useEffect(() => {
+  //   if (allCompleted) {
+  //     window.trainerApi.allExercisesComplete();
+  //   }
+  // }, [allCompleted]);
 
   const handleIncrement = (index: number) => {
+    console.log("Increment button clicked for exercise at index:", index);
     setStates((prevStates) => {
       return prevStates.map((prevState, i) => {
         if (i === index) {
-          const updatedState = { ...prevState, count: prevState.count + 1 };
+          const updatedState = {
+            ...prevState,
+            currentRepetitions: prevState.currentRepetitions + 1,
+          };
           if (
-            updatedState.count === updatedState.repetitions &&
+            updatedState.currentRepetitions === updatedState.repetitions &&
             !updatedState.completed
           ) {
             updatedState.completed = true; // Set completed flag to true
           }
+          console.log("Calling incrementRepetitions for:", updatedState.name);
+          window.trainerApi.incrementRepetitions(updatedState.name);
           return updatedState;
         }
         return prevState;
@@ -93,7 +103,10 @@ const ExerciseList: React.FC<Props> = ({ exercises }) => {
     setStates((prevStates) => {
       return prevStates.map((prevState, i) => {
         if (i === index) {
-          return { ...prevState, count: prevState.count - 1 };
+          return {
+            ...prevState,
+            currentRepetitions: prevState.currentRepetitions - 1,
+          };
         }
         return prevState;
       });
@@ -113,20 +126,23 @@ const ExerciseList: React.FC<Props> = ({ exercises }) => {
             <div className="exercise-state-button-container">
               <button
                 className="exercise-state-button"
-                disabled={state.count === 0 || state.completed}
+                disabled={state.currentRepetitions === 0 || state.completed}
                 onClick={() => handleDecrement(index)}
               >
                 -
               </button>
               <button
                 className="exercise-state-button"
-                disabled={state.count === state.repetitions}
+                disabled={
+                  state.currentRepetitions === state.repetitions ||
+                  state.completed
+                }
                 onClick={() => handleIncrement(index)}
               >
                 +
               </button>
             </div>
-            <p className="exercise-state-label">{`[${state.count}/${state.repetitions}]`}</p>
+            <p className="exercise-state-label">{`[${state.currentRepetitions}/${state.repetitions}]`}</p>
           </div>
         </div>
       ))}
