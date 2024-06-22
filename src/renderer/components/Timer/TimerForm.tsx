@@ -25,11 +25,19 @@ function TimerForm() {
   }, []);
 
   const onSubmit = (data: TimerModel) => {
+    // Check if data contains NaN and convert to 0
+    for (let timeKey in data) {
+      if (isNaN(data[timeKey])) {
+        data[timeKey] = 0;
+      }
+    }
+
     const timer = new TimerModel(
       data.hours as number,
       data.minutes as number,
       data.seconds as number
     );
+
     window.timerApi.setTimer(timer);
   };
 
