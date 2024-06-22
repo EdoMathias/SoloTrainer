@@ -28,3 +28,9 @@
   backdrop-filter: blur(10px); /* Apply blur to the background */
   -webkit-backdrop-filter: blur(10px); /* Safari support */
 }
+
+.time-left-button:disabled {
+  border: 2px solid gray; /* White border */
+  color: gray;
+  cursor: default;
+}

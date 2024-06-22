@@ -8,6 +8,7 @@ function TimeLeft() {
   );
   const [timeLeft, setTimeLeft] = useState<TimerModel>(new TimerModel(0, 0, 0));
   const [isActive, setIsActive] = useState(false);
+  const [isTimerSet, setIsTimerSet] = useState(false);
 
   useEffect(() => {
     const getTimer = async () => {
@@ -18,6 +19,10 @@ function TimeLeft() {
         }
         setAllotedTime(timer);
         setTimeLeft(timer);
+
+        Object.values(timer).every((timeKey) => timeKey === 0)
+          ? setIsTimerSet(true)
+          : setIsTimerSet(false);
       } catch (error) {
         console.error("Error fetching timer:", error);
       }
@@ -80,10 +85,18 @@ function TimeLeft() {
         {timeLeft.seconds} SECONDS
       </h2>
       <div className="time-left-buttons-container">
-        <button className="time-left-button" onClick={handleStartStop}>
+        <button
+          className="time-left-button"
+          disabled={isTimerSet}
+          onClick={handleStartStop}
+        >
           {isActive ? "PAUSE TIMER" : "START TIMER"}
         </button>
-        <button className="time-left-button" onClick={handleReset}>
+        <button
+          className="time-left-button"
+          disabled={isTimerSet}
+          onClick={handleReset}
+        >
           RESET TIMER
         </button>
       </div>
