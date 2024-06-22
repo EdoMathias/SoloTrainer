@@ -1,5 +1,5 @@
-import { stat } from 'original-fs';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import "./ExerciseList.css";
 
 interface Exercise {
   id: number;
@@ -61,7 +61,7 @@ const ExerciseList: React.FC<Props> = ({ exercises }) => {
     const isAllComplete = states.every((state) => {
       state.completed && state.notificationSent;
     });
-    console.log('completed: ', isAllComplete);
+    console.log("completed: ", isAllComplete);
     setAllCompleted(isAllComplete);
   }, [states]);
 
@@ -100,26 +100,34 @@ const ExerciseList: React.FC<Props> = ({ exercises }) => {
     });
   };
 
+  if (states.length === 0) {
+    return <div className="exercise-name-label">{`[NO EXERCISES SET]`}</div>;
+  }
+
   return (
-    <div>
+    <div className="exercise-list-container">
       {states.map((state, index) => (
-        <div key={index}>
-          <p>
-            {state.name}{' '}
-            <button
-              disabled={state.count === 0 || state.completed}
-              onClick={() => handleDecrement(index)}
-            >
-              -
-            </button>
-            <button
-              disabled={state.count === state.repetitions}
-              onClick={() => handleIncrement(index)}
-            >
-              +
-            </button>{' '}
-            {`[${state.count}/${state.repetitions}]`}
-          </p>
+        <div className="exercise-container" key={index}>
+          <p className="exercise-name-label">{state.name}</p>
+          <div className="exercise-state-container">
+            <div className="exercise-state-button-container">
+              <button
+                className="exercise-state-button"
+                disabled={state.count === 0 || state.completed}
+                onClick={() => handleDecrement(index)}
+              >
+                -
+              </button>
+              <button
+                className="exercise-state-button"
+                disabled={state.count === state.repetitions}
+                onClick={() => handleIncrement(index)}
+              >
+                +
+              </button>
+            </div>
+            <p className="exercise-state-label">{`[${state.count}/${state.repetitions}]`}</p>
+          </div>
         </div>
       ))}
     </div>

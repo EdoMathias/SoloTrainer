@@ -1,0 +1,21 @@
+.daily-quest-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+hr {
+  width: 90vw;
+}
+
+.daily-quest-title {
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.daily-quest-title.goal-title {
+  text-decoration: underline;
+}

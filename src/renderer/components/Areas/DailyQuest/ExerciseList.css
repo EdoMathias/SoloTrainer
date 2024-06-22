@@ -1,0 +1,55 @@
+.exercise-list-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100vw;
+}
+
+.exercise-container {
+  display: flex;
+  width: 100vw;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.exercise-name-label {
+  color: white;
+}
+
+.exercise-state-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 20vw;
+}
+
+.exercise-state-button {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.096
+  ); /* Semi-transparent white background */
+  border: 2px solid white; /* White border */
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  backdrop-filter: blur(10px); /* Apply blur to the background */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+}
+
+.exercise-state-button:disabled {
+  border: 2px solid gray; /* Gray border */
+  color: gray; /* Gray text */
+}
+
+.exercise-state-button:enabled {
+  cursor: pointer;
+  box-shadow: 0 0 4px white; /* White glowing effect */
+}
+
+.exercise-state-label {
+  color: white;
+}

@@ -1,0 +1,57 @@
+.time-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.time-form-header {
+  color: white;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.time-form-label {
+  color: white;
+  font-size: 20px;
+  margin: 10px;
+}
+
+.time-form-input {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.096
+  ); /* Semi-transparent white background */
+  border: 2px solid white; /* White border */
+  color: white;
+  text-align: center;
+  font-size: medium;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 0 5px white; /* White glowing effect */
+  backdrop-filter: blur(10px); /* Apply blur to the background */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+}
+
+.timer-submit-button {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.096
+  ); /* Semi-transparent white background */
+  border: 2px solid white; /* White border */
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 15px;
+  cursor: pointer;
+  box-shadow: 0 0 10px white; /* White glowing effect */
+  backdrop-filter: blur(10px); /* Apply blur to the background */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+}

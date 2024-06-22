@@ -1,0 +1,36 @@
+.time-left-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.time-left-title {
+  color: white;
+}
+
+.time-left-button {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.096
+  ); /* Semi-transparent white background */
+  border: 2px solid white; /* White border */
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 15px;
+  cursor: pointer;
+  box-shadow: 0 0 10px white; /* White glowing effect */
+  backdrop-filter: blur(10px); /* Apply blur to the background */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+}
+
+.time-left-button:disabled {
+  border: 2px solid gray; /* White border */
+  color: gray;
+  cursor: default;
+}
