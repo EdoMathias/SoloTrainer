@@ -15,6 +15,7 @@ class MainApp {
     this.windowManager = new WindowManager();
     this.store = new Store();
     app.on("ready", this.windowManager.createWindow);
+    app.on("browser-window-created", this.handleDateOnAppOpen.bind(this));
     app.on("window-all-closed", this.handleWindowAllClosed);
     app.on("activate", this.handleActivate);
     ipcMain.handle("set-exercises", this.setExercises.bind(this));
@@ -132,8 +133,42 @@ class MainApp {
   private handleAllExercisesCompleted() {
     // Send notification about all exercises being completed
     this.allExercisesCompleteNotification();
+  }
 
-    // Lock changes until the next day
+  //----------------------------------------------------------------------------
+  private setDate(event: Electron.IpcMainEvent | null = null): void {
+    let date = new Date().getDate();
+    this.store.set("date", date);
+  }
+
+  //----------------------------------------------------------------------------
+  private getDate(event: Electron.IpcMainEvent | null = null): number {
+    const date = this.store.get("date") as number;
+    return date;
+  }
+
+  //----------------------------------------------------------------------------
+  private resetRepetitionsForNewDate(
+    event: Electron.IpcMainEvent | null = null
+  ) {
+    const dayFromConfig = this.getDate(null);
+    const today = new Date().getDate();
+    let exercises = this.getExercises();
+
+    if (today != dayFromConfig) {
+      exercises.forEach((exercise) => {
+        exercise.completed = false;
+        exercise.notificationSent = false;
+        exercise.currentRepetitions = 0;
+      });
+    }
+    this.setExercises(null, exercises);
+  }
+
+  //----------------------------------------------------------------------------
+  private handleDateOnAppOpen(event: Electron.IpcMainEvent | null = null) {
+    this.setDate();
+    this.resetRepetitionsForNewDate();
   }
 
   //----------------------------------------------------------------------------
