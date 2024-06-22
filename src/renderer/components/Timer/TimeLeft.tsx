@@ -15,6 +15,7 @@ function TimeLeft() {
       try {
         const timer = await window.timerApi.getTimer();
         if (!timer) {
+          setIsTimerSet(true);
           return;
         }
         setAllotedTime(timer);
