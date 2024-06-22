@@ -2,9 +2,10 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import ExerciseModel from "../../../models/exercise-model";
 import "./ExerciseForm.css";
+import { ExerciseFormData } from "../../../types/ExerciseFormData";
 
 function ExerciseForm() {
-  const { register, handleSubmit, setValue } = useForm<ExerciseModel>();
+  const { register, handleSubmit, setValue } = useForm<ExerciseFormData>();
 
   // Change to set the amount of exercises
   const exerciseArrayLength: number = 4;
@@ -26,15 +27,17 @@ function ExerciseForm() {
     };
 
     getExercises();
-  }, []);
+  }, [setValue]);
 
-  const onSubmit = (data: ExerciseModel) => {
+  const onSubmit = (data: ExerciseFormData) => {
     const exercises: ExerciseModel[] = [];
     for (let i = 0; i < exerciseArrayLength; i++) {
       const name = data[`exercise${i + 1}`] as string;
       const repetitions = data[`exercise${i + 1}_number`] as number;
       if (name && repetitions) {
-        exercises.push(new ExerciseModel(i + 1, name, repetitions, false));
+        exercises.push(
+          new ExerciseModel(i + 1, name, false, repetitions, false)
+        );
       }
     }
     window.trainerApi.setExercises(exercises);
@@ -54,14 +57,12 @@ function ExerciseForm() {
             className="exercises-form-input"
             type="text"
             id={`exercise${index + 1}`}
-            name={`exercise${index + 1}`}
             {...register(`exercise${index + 1}`)}
           />
           <input
             className="exercises-form-input"
             type="number"
             id={`exercise${index + 1}_number`}
-            name={`exercise${index + 1}_number`}
             {...register(`exercise${index + 1}_number`)}
           />
         </div>
