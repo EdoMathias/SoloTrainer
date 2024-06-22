@@ -4,6 +4,7 @@ import TimerModel from "./models/timer-model";
 export interface ITrainerApi {
   setExercises: (exercises: ExerciseModel[]) => void;
   getExercises: () => Promise<ExerciseModel[]>;
+  incrementRepetitions: (exerciseName: string) => void;
   exerciseComplete: (exerciseName: string) => void;
   allExercisesComplete: () => void;
 }

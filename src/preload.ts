@@ -7,10 +7,13 @@ import TimerModel from "./models/timer-model";
 
 contextBridge.exposeInMainWorld("trainerApi", {
   setExercises: (exercises: ExerciseModel[]) => {
-    ipcRenderer.send("set-exercises", exercises);
+    return ipcRenderer.invoke("set-exercises", exercises);
   },
   getExercises: () => {
     return ipcRenderer.invoke("get-exercises");
+  },
+  incrementRepetitions: (exerciseName: string) => {
+    ipcRenderer.send("increment-repetitions", exerciseName);
   },
   exerciseComplete: (exerciseName: string) => {
     ipcRenderer.send("exercise-complete", exerciseName);
