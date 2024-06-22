@@ -1,7 +1,7 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import TimerModel from "../../../models/timer-model";
 import "./TimerForm.css";
-import { useEffect, useState } from "react";
 
 function TimerForm() {
   const { register, handleSubmit, setValue } = useForm<TimerModel>();
