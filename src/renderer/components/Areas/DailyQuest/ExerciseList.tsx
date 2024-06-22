@@ -42,8 +42,6 @@ const ExerciseList: React.FC<Props> = ({ exercises }) => {
             if (i === index) {
               return { ...prevState, completed: true, notificationSent: true };
             }
-            console.log(prevState);
-
             return prevState;
           });
         });

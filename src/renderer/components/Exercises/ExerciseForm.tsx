@@ -41,7 +41,6 @@ function ExerciseForm() {
       }
     }
     window.trainerApi.setExercises(exercises);
-    console.log(exercises);
   };
 
   return (

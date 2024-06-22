@@ -89,8 +89,6 @@ class MainApp {
     if (exerciseFound) {
       this.store.set("exercises", exercises);
       this.exerciseCompleteNotification(null, exerciseName);
-    } else {
-      console.log(`Exercise with name ${exerciseName} not found.`);
     }
 
     let allCompleted = this.checkIfAllCompleted(exercises);

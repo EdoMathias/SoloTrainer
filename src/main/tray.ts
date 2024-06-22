@@ -32,8 +32,6 @@ class AppTray {
   public createTray() {
     const trayIcon = path.join(__dirname, "../assets/trayIcon.png"); // Adjust the path as per your file location
 
-    console.log(trayIcon);
-
     this.tray = new Tray(trayIcon);
     const contextMenu = Menu.buildFromTemplate(this.menuItems);
 

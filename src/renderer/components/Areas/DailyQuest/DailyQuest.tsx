@@ -12,8 +12,6 @@ function DailyQuest() {
     const getExercises = async () => {
       try {
         const exercises = await window.trainerApi.getExercises();
-        console.log("Exercises:", exercises);
-
         setDailyQuest(exercises);
       } catch (error) {
         console.error("Error fetching exercises:", error);
