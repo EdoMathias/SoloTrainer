@@ -181,7 +181,11 @@ class MainApp {
     event: Electron.IpcMainEvent | null = null
   ) {
     const dayFromConfig = this.getDate(null);
-    const today = new Date().getDate() + 1;
+    const today = new Date().getDate();
+
+    // To simulate a new day
+    // const today = new Date().getDate() + 1;
+
     let exercises = this.getExercises();
 
     if (today != dayFromConfig) {
