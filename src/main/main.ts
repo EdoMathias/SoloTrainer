@@ -1,12 +1,12 @@
 // This is the main process file. It will manage application lifecycle events
 //  and IPC communication.
 import { app, ipcMain } from "electron";
-import WindowManager from "./window";
 import Store from "electron-store";
 import ExerciseModel from "../models/exercise-model";
-import AppNotification from "./notification";
-import TimerModel from "../models/timer-model";
 import GetTimerModel from "../models/getTimer-model";
+import TimerModel from "../models/timer-model";
+import AppNotification from "./notification";
+import WindowManager from "./window";
 
 class MainApp {
   private windowManager: WindowManager;

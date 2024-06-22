@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import ExerciseModel from "../../../models/exercise-model";
-import "./ExerciseForm.css";
 import { ExerciseFormData } from "../../../types/ExerciseFormData";
+import "./ExerciseForm.css";
 
 function ExerciseForm() {
   const { register, handleSubmit, setValue } = useForm<ExerciseFormData>();

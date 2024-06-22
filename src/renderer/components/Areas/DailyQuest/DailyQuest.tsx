@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import ExerciseModel from "../../../../models/exercise-model";
-import AllotedTime from "../../Timer/AllotedTime";
-import TimeLeft from "../../Timer/TimeLeft";
-import ExerciseList from "./ExerciseList";
-import "./DailyQuest.css";
 import MenuButton from "../../MenuButton/MenuButton";
+import TimeLeft from "../../Timer/TimeLeft";
+import "./DailyQuest.css";
+import ExerciseList from "./ExerciseList";
 
 function DailyQuest() {
   const [dailyQuest, setDailyQuest] = useState<ExerciseModel[]>([]);
