@@ -15,6 +15,9 @@ contextBridge.exposeInMainWorld("trainerApi", {
   incrementRepetitions: (exerciseName: string) => {
     ipcRenderer.send("increment-repetitions", exerciseName);
   },
+  decrementRepetitions: (exerciseName: string) => {
+    ipcRenderer.send("decrement-repetitions", exerciseName);
+  },
   exerciseComplete: (exerciseName: string) => {
     ipcRenderer.send("exercise-complete", exerciseName);
   },

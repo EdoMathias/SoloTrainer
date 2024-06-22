@@ -77,10 +77,12 @@ const ExerciseList: React.FC<Props> = ({ exercises }) => {
     setStates((prevStates) => {
       return prevStates.map((prevState, i) => {
         if (i === index) {
-          return {
+          const updatedState = {
             ...prevState,
             currentRepetitions: prevState.currentRepetitions - 1,
           };
+          window.trainerApi.decrementRepetitions(updatedState.name);
+          return updatedState;
         }
         return prevState;
       });

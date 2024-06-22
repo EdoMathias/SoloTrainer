@@ -24,6 +24,10 @@ class MainApp {
       "increment-repetitions",
       this.incrementExerciseRepetitions.bind(this)
     );
+    ipcMain.on(
+      "decrement-repetitions",
+      this.decrementExerciseRepetitions.bind(this)
+    );
     ipcMain.on("exercise-complete", this.setExerciseComplete.bind(this));
     ipcMain.on("all-exercises-complete", this.allExercisesCompleteNotification);
     ipcMain.on("set-timer", this.setTimer.bind(this));
@@ -121,6 +125,31 @@ class MainApp {
   }
 
   //----------------------------------------------------------------------------
+  private decrementExerciseRepetitions(
+    event: Electron.IpcMainEvent,
+    exerciseName: string
+  ) {
+    let exercises = this.getExercises();
+    let exerciseFound = false;
+
+    exercises = exercises.map((exercise) => {
+      if (exercise.name === exerciseName) {
+        exerciseFound = true;
+        return {
+          ...exercise,
+          currentRepetitions: exercise.currentRepetitions - 1,
+        };
+      }
+      return exercise;
+    });
+
+    if (exerciseFound) {
+      this.setExercises(null, exercises);
+      return;
+    }
+  }
+
+  //----------------------------------------------------------------------------
   private checkIfAllCompleted(exercises: ExerciseModel[]): boolean {
     let allCompleted = exercises.every(
       (exercise) => exercise.completed === true
@@ -152,7 +181,7 @@ class MainApp {
     event: Electron.IpcMainEvent | null = null
   ) {
     const dayFromConfig = this.getDate(null);
-    const today = new Date().getDate();
+    const today = new Date().getDate() + 1;
     let exercises = this.getExercises();
 
     if (today != dayFromConfig) {
