@@ -106,10 +106,7 @@ class MainApp {
       this.exerciseCompleteNotification(null, exerciseName);
     }
 
-    let allCompleted = this.checkIfAllCompleted(exercises);
-    if (allCompleted) {
-      this.handleAllExercisesCompleted();
-    }
+    this.handleAllExercisesCompleted(exercises);
   }
 
   //----------------------------------------------------------------------------
@@ -190,9 +187,12 @@ class MainApp {
   Checks if all exercises have been completed and sends the all-completed
   notification accordingly.
   */
-  private handleAllExercisesCompleted() {
-    // Send notification about all exercises being completed
-    this.allExercisesCompleteNotification();
+  private handleAllExercisesCompleted(exercises: ExerciseModel[]) {
+    let allCompleted = this.checkIfAllCompleted(exercises);
+    if (allCompleted) {
+      // Send notification about all exercises being completed
+      this.allExercisesCompleteNotification();
+    }
   }
 
   //----------------------------------------------------------------------------
