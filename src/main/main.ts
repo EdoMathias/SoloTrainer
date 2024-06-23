@@ -194,12 +194,29 @@ class MainApp {
       });
     }
     this.setExercises(null, exercises);
+    this.setDate();
+  }
+
+  //----------------------------------------------------------------------------
+  private checkIfDayPassed(event: Electron.IpcMainEvent | null = null) {
+    const timeToCheck = 60 * 60 * 1000; // Currently set to 1 hour
+
+    setInterval(() => {
+      // Get the date on each interval
+      const dayFromConfig = this.getDate(null);
+      const today = new Date().getDate();
+
+      if (today != dayFromConfig) {
+        this.resetRepetitionsForNewDate();
+      }
+    }, timeToCheck);
   }
 
   //----------------------------------------------------------------------------
   private handleDateOnAppOpen(event: Electron.IpcMainEvent | null = null) {
     this.setDate();
     this.resetRepetitionsForNewDate();
+    this.checkIfDayPassed();
   }
 
   //----------------------------------------------------------------------------
