@@ -1,7 +1,7 @@
 {
   "name": "SoloTrainer",
   "productName": "Solo Trainer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "SoloTrainer takes inspiration from Solo-Leveling's daily quest system",
   "main": ".webpack/main",
   "scripts": {
