@@ -50,6 +50,10 @@ class MainApp {
   }
 
   //----------------------------------------------------------------------------
+  /* 
+  Sets the exercises passed by the renderer
+  in the config.json file for data management.
+  */
   private setExercises(
     event: Electron.IpcMainInvokeEvent | null = null,
     exercises: ExerciseModel[]
@@ -58,6 +62,9 @@ class MainApp {
   }
 
   //----------------------------------------------------------------------------
+  /*
+  Gets the exercises we've set from the config.json.
+  */
   private getExercises(
     event: Electron.IpcMainInvokeEvent | null = null
   ): ExerciseModel[] {
@@ -71,6 +78,14 @@ class MainApp {
   }
 
   //----------------------------------------------------------------------------
+  /* 
+  Sets the given exercise as complete in the config.json so the app knows it is
+  done for today.
+  notificationSent is also marked as complete to prevent notifications from 
+  firing when they shouldn't.
+  Checks if all exercises are completed so we can fire the 
+  all-completed notification
+  */
   private setExerciseComplete(
     event: Electron.IpcMainEvent,
     exerciseName: string
@@ -98,6 +113,11 @@ class MainApp {
   }
 
   //----------------------------------------------------------------------------
+  /* 
+  Increments the currentRepetitions of a given exercise in the config.json
+  so the app can know the progress when relaunching / navigating to-and-from
+  different pages.
+  */
   private incrementExerciseRepetitions(
     event: Electron.IpcMainEvent,
     exerciseName: string
@@ -123,6 +143,11 @@ class MainApp {
   }
 
   //----------------------------------------------------------------------------
+  /* 
+  Decrements the currentRepetitions of a given exercise in the config.json
+  so the app can know the progress when relaunching / navigating to-and-from
+  different pages.
+  */
   private decrementExerciseRepetitions(
     event: Electron.IpcMainEvent,
     exerciseName: string
@@ -148,6 +173,10 @@ class MainApp {
   }
 
   //----------------------------------------------------------------------------
+  /* 
+  Checks if all exercises are marked as completed so we can send the 
+  "finished all exercises" notification.
+  */
   private checkIfAllCompleted(exercises: ExerciseModel[]): boolean {
     let allCompleted = exercises.every(
       (exercise) => exercise.completed === true
@@ -157,24 +186,40 @@ class MainApp {
   }
 
   //----------------------------------------------------------------------------
+  /*
+  Checks if all exercises have been completed and sends the all-completed
+  notification accordingly.
+  */
   private handleAllExercisesCompleted() {
     // Send notification about all exercises being completed
     this.allExercisesCompleteNotification();
   }
 
   //----------------------------------------------------------------------------
+  /*
+  Sets the date in the config.json so it can be used to check if a day has passed.
+  */
   private setDate(event: Electron.IpcMainEvent | null = null): void {
     let date = new Date().getDate();
     this.store.set("date", date);
   }
 
   //----------------------------------------------------------------------------
+  /*
+  Gets the saved date from the config.json so it can be used to check if a day
+  has passed.
+  */
   private getDate(event: Electron.IpcMainEvent | null = null): number {
     const date = this.store.get("date") as number;
     return date;
   }
 
   //----------------------------------------------------------------------------
+  /*
+  Resets the completed, notificationSent, and currentRepetitions states when
+  detecting that the today is a different day than the one in the config.json.
+  When the exercises have been reset, we set the new exercises and day.
+  */
   private resetRepetitionsForNewDate(
     event: Electron.IpcMainEvent | null = null
   ) {
@@ -198,6 +243,10 @@ class MainApp {
   }
 
   //----------------------------------------------------------------------------
+  /*
+  Sets an interval to check if a day has passed while the app is running.
+  If a new day has been detected, call resetRepetitionsForNewDate();
+  */
   private checkIfDayPassed(event: Electron.IpcMainEvent | null = null) {
     const timeToCheck = 60 * 60 * 1000; // Currently set to 1 hour
 
@@ -213,6 +262,10 @@ class MainApp {
   }
 
   //----------------------------------------------------------------------------
+  /*
+  Sets the date and checks if a day has passed in order to reset the exercises
+  progress for a new date.
+  */
   private handleDateOnAppOpen(event: Electron.IpcMainEvent | null = null) {
     this.setDate();
     this.resetRepetitionsForNewDate();
@@ -220,11 +273,17 @@ class MainApp {
   }
 
   //----------------------------------------------------------------------------
+  /*
+  Sets the timer in the config.json to be used by the renderer.
+  */
   private setTimer(event: Electron.IpcMainEvent, timer: TimerModel): void {
     this.store.set("timer", timer);
   }
 
   //----------------------------------------------------------------------------
+  /*
+  Gets the timer from the config.json.
+  */
   private getTimer(event: Electron.IpcMainEvent) {
     const timer = this.store.get("timer") as GetTimerModel;
 
@@ -242,11 +301,17 @@ class MainApp {
   }
 
   //----------------------------------------------------------------------------
+  /*
+  Sends an app notification for when the timer is up.
+  */
   private timerCompleteNotification(): void {
     new AppNotification("Timer finished", "GET TO WORK!").showNotification();
   }
 
   //----------------------------------------------------------------------------
+  /*
+  Sends an app notification for completing an exercise.
+  */
   private exerciseCompleteNotification(
     event: Electron.IpcMainEvent | null = null,
     exerciseName: string
@@ -258,6 +323,9 @@ class MainApp {
   }
 
   //----------------------------------------------------------------------------
+  /*
+  Sends an app notification for completing all exercises.
+  */
   private allExercisesCompleteNotification(): void {
     new AppNotification(
       "All exercises complete",
