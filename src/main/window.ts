@@ -36,6 +36,14 @@ class WindowManager {
     const appTray = new AppTray(this.mainWindow);
     appTray.createTray();
 
+    // Handle window close event
+    this.mainWindow.on("close", (event) => {
+      event.preventDefault(); // Prevents the window from actually closing
+
+      // Minimize to tray instead
+      this.mainWindow?.hide();
+    });
+
     this.mainWindow.on("closed", () => {
       this.mainWindow = null;
     });

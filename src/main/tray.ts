@@ -23,7 +23,7 @@ class AppTray {
       {
         label: "Quit",
         click: () => {
-          app.quit();
+          app.exit(0);
         },
       },
     ];
@@ -35,8 +35,12 @@ class AppTray {
     this.tray = new Tray(trayIcon);
     const contextMenu = Menu.buildFromTemplate(this.menuItems);
 
-    this.tray.setToolTip("Electron App");
+    this.tray.setToolTip("SoloTrainer");
     this.tray.setContextMenu(contextMenu);
+
+    this.tray.on("click", () => {
+      this.mainWindow.show();
+    });
   }
 }
 
