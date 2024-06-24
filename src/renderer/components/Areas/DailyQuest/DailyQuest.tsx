@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import ExerciseModel from "../../../../models/exercise-model";
-import MenuButton from "../../MenuButton/MenuButton";
-import TimeLeft from "../../Timer/TimeLeft";
-import "./DailyQuest.css";
-import ExerciseList from "./ExerciseList";
+import { useEffect, useState } from 'react';
+import ExerciseModel from '../../../../models/exercise-model';
+import MenuButton from '../../MenuButton/MenuButton';
+import TimeLeft from '../../Timer/TimeLeft';
+import './DailyQuest.css';
+import ExerciseList from './ExerciseList';
 
 function DailyQuest() {
   const [dailyQuest, setDailyQuest] = useState<ExerciseModel[]>([]);
@@ -14,17 +14,21 @@ function DailyQuest() {
         const exercises = await window.trainerApi.getExercises();
         setDailyQuest(exercises);
       } catch (error) {
-        console.error("Error fetching exercises:", error);
+        console.error('Error fetching exercises:', error);
       }
     };
 
-    getExercises();
+    // Fetch exercises every hour
+    setInterval(async () => {
+      await getExercises();
+    }, 60 * 60 * 1000);
+    // getExercises();
   }, []);
 
   return (
     <div className="daily-quest-container">
       <h3 className="daily-quest-title">
-        {"[Daily Quest: Strength Training has arrived.]"}
+        {'[Daily Quest: Strength Training has arrived.]'}
       </h3>
       <h2 className="daily-quest-title goal-title">GOAL</h2>
       <ExerciseList exercises={dailyQuest} />
