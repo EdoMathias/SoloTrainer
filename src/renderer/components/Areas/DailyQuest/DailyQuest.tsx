@@ -18,11 +18,11 @@ function DailyQuest() {
       }
     };
 
+    getExercises();
     // Fetch exercises every hour
     setInterval(async () => {
       await getExercises();
     }, 60 * 60 * 1000);
-    // getExercises();
   }, []);
 
   return (
